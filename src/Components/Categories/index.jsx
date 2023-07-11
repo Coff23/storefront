@@ -1,19 +1,27 @@
+import { Button, ButtonGroup } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { set } from "../../store/reducer";
 
 function Categories() {
-  const { categories } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.store);
+  console.log('categories', categories);
   const dispatch = useDispatch();
 
-  const categoryHandler = 
+  // const categoryHandler = 
 
   return(
     <>
-      <h3>Browse our Categories</h3>
-      <text>ELECTRONICS</text>
-      <text>FOOD</text>
-      <div>
-        <h1>{}</h1>
-      </div>
+      <h2>Browse our Categories</h2>
+      <ButtonGroup variant="text" aria-aria-label="text button geroup">
+        {
+          categories.map((category, index) => (
+            <Button key={`categories-${index}`}
+            onClick={() => dispatch(set(category))}
+            >{category.displayName}
+            </Button>
+          ))
+        }
+      </ButtonGroup>
     </>
   )
 }
