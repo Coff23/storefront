@@ -1,32 +1,43 @@
-import { Box, IconButton, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import DeleteIcon from '@mui/icons-material/Delete'
-import { removeFromCart } from "../../store/actions";
+import { useDispatch, useSelector } from 'react-redux';
+import { When } from 'react-if';
+import { removeFromCart } from '../../store/cart';
+import { addInv } from '../../store/products';
 
+// import './styles.scss';
 
-const Cart = () => {
+function SimpleCart() {
+  const { cart } = useSelector(state => state);
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state.cart);
+
+  const removeDispatcher = (product) => {
+    dispatch(removeFromCart(product));
+    dispatch(addInv(product));
+  };
 
   return (
     <>
-      {
-        cart.map((product, index) => {
-          return (
-            <Box 
-              className='cart-items'
-              key={`cart=${index}`}
-            >
-              <Typography>{product.name}</Typography>
-              <IconButton>
-                <DeleteIcon onClick={() => dispatch(removeFromCart(product))} />
-              </IconButton>
-            </Box>
-          )
-        })
-      }
+      <When condition={cart.length > 0}>
+        <div className="simple-cart">
+          <ul>
+
+            {
+              cart.map((product, index) => (
+                <li key={`simpleCart-${index}`} className="item">
+                  {product.name}
+                  <span
+                    onClick={() => removeDispatcher(product)}
+                    className="remove"
+                  >
+                    X
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </When>
     </>
   )
 }
 
-export default Cart;
+export default SimpleCart;

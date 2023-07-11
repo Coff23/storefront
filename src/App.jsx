@@ -1,17 +1,20 @@
-import Header from "./Components/Header"
-import Footer from "./Components/Footer"
-import Categories from "./Components/Categories"
-import Products from "./Components/Products"
-import Cart from "./Components/Cart"
+import Categories from './Components/Categories'
+import Footer from './Components/Footer'
+import Header from './Components/Header'
+import Products from './Components/Products'
+import SimpleCart from './Components/Cart';
+// import './App.scss';
 
 function App() {
 
   return (
     <>
-      <Header />
-      <Categories />
-      <Cart />
-      <Products />
+      <div className='content'>
+        <Header />
+        <Categories />
+        <SimpleCart />
+        <Products />
+      </div>
       <Footer />
     </>
   )

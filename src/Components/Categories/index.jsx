@@ -1,35 +1,39 @@
-import { Button, ButtonGroup } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { set } from "../../store/reducer";
-import { reset } from "../../store/actions";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { getCategories, setCategory } from '../../store/categories';
 
 function Categories() {
-  const { categories } = useSelector((state) => state.store);
-  console.log('categories', categories);
+  const { categories } = useSelector((state) => state.categories)
   const dispatch = useDispatch();
 
-  // const categoryHandler = (category) => {
-  //   dispatch(changeProducts(category));
-  // }
+  const setDispatcher = (category) => {
+    dispatch(setCategory(category));
+  };
 
-  return(
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+
+  return (
     <>
       <h2>Browse our Categories</h2>
-      <ButtonGroup variant="text" aria-aria-label="text button geroup">
+      <ButtonGroup variant="text" aria-label="text button group">
         {
           categories.map((category, index) => (
-            <Button key={`categories-${index}`}
-            onClick={() => dispatch(set(category))}
-            >{category.displayName}
+            <Button
+              key={`categories-${index}`}
+              onClick={() => setDispatcher(category)}
+            >
+              {category.name}
             </Button>
           ))
         }
       </ButtonGroup>
-      <Button onClick={() => reset()}>
-        Reset
-      </Button>
+
     </>
   )
 }
 
-export default Categories;
+export default Categories
