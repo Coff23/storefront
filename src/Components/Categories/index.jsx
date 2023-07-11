@@ -1,13 +1,16 @@
 import { Button, ButtonGroup } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "../../store/reducer";
+import { reset } from "../../store/actions";
 
 function Categories() {
   const { categories } = useSelector((state) => state.store);
   console.log('categories', categories);
   const dispatch = useDispatch();
 
-  // const categoryHandler = 
+  // const categoryHandler = (category) => {
+  //   dispatch(changeProducts(category));
+  // }
 
   return(
     <>
@@ -22,6 +25,9 @@ function Categories() {
           ))
         }
       </ButtonGroup>
+      <Button onClick={() => reset()}>
+        Reset
+      </Button>
     </>
   )
 }
