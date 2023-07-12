@@ -9,18 +9,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { addToCart } from '../../store/cart';
-import { getProducts, removeInv } from '../../store/products';
+import { removeInv, getProducts } from '../../store/products';
+import { Link } from 'react-router-dom';
 
 function Products() {
-  const { activeCategory } = useSelector((state) => state.categories);
-  const { products } = useSelector((state) => state);
+  const activeCategory = useSelector((state) => state.categories.activeCategory);
+  const products = useSelector((state) => state.products);
    console.log('this is products.....', products)
   const dispatch = useDispatch();
-
-  // const addDispatcher = (product) => {
-  //   dispatch(addToCart(product));
-  //   dispatch(addProduct(product));
-  // };
 
   const addDispatcher = (product) => {
     dispatch(addToCart(product));
@@ -59,7 +55,7 @@ function Products() {
                     >
                       ADD TO CART
                     </Button>
-                    <Button size="small">VIEW DETAILS</Button>
+                    <Button size="small" component={Link} to={`productDetails/${product._id}`}>VIEW DETAILS</Button>
                   </CardActions>
                 </Card>
               </Grid>

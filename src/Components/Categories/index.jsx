@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { getCategories, setCategory } from '../../store/categories';
+// import { setProducts } from '../../store/products';
 
 function Categories() {
-  const { categories } = useSelector((state) => state.categories)
+  const categories = useSelector((state) => state.categories.categories)
+  // console.log('categories', categories);
   const dispatch = useDispatch();
 
   const setDispatcher = (category) => {
     dispatch(setCategory(category));
+    // dispatch(setProducts(category));
   };
 
   useEffect(() => {

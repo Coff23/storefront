@@ -3,10 +3,10 @@ import { When } from 'react-if';
 import { removeFromCart } from '../../store/cart';
 import { addInv } from '../../store/products';
 
-// import './styles.scss';
+import './styles.scss';
 
 function SimpleCart() {
-  const { cart } = useSelector(state => state);
+  const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
   const removeDispatcher = (product) => {
@@ -41,3 +41,4 @@ function SimpleCart() {
 }
 
 export default SimpleCart;
+
